@@ -2,7 +2,9 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { FontAwesome } from "@expo/vector-icons"
+import { Provider } from "react-redux"
 
+import { store } from "./store"
 import { HomeScreen } from "./screens/HomeScreen"
 import { ArticleScreen } from "./screens/ArticleScreen"
 import { ClipScreen } from "./screens/ClipScreen"
@@ -31,11 +33,13 @@ const HomeStack = () => {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator screenOptions={screenOptions}>
-        <Tab.Screen name="HomeTab" component={HomeStack} options={{ headerShown: false, title: "Home" }} />
-        <Tab.Screen name="ClipTab" component={ClipScreen} options={{ headerShown: false, title: "Clip" }} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Tab.Navigator screenOptions={screenOptions}>
+          <Tab.Screen name="HomeTab" component={HomeStack} options={{ headerShown: false, title: "Home" }} />
+          <Tab.Screen name="ClipTab" component={ClipScreen} options={{ headerShown: false, title: "Clip" }} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </Provider>
   )
 }
